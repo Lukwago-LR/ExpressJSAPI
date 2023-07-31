@@ -1,4 +1,4 @@
-function mainFunction() {
+function AlpineMainFunction() {
     return {
         sentence: "",
         nameUser: "",
@@ -61,3 +61,8 @@ function mainFunction() {
 
     };
 }
+
+
+document.addEventListener('alpine:init', () => {
+    Alpine.data('mainFunction', AlpineMainFunction)
+})
