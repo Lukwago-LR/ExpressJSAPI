@@ -1,0 +1,12 @@
+POST http://localhost:3019/api/greet
+content-type: application/json
+
+{
+    'language' : 'xhosa',
+    'greeting' : 'Molo'
+}
+
+### 
+
+GET http://localhost:3019/api/greet?name=Andrey&language=Pedi
+content-type: application/json

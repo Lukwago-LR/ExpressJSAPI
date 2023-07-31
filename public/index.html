@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>API Widgets</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="style.css" rel="stylesheet">
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"
+        integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <style>
+        [x-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body x-cloak x-data="mainFunction">
+    <div class="header"> API WIDGETS</div>
+
+    <div class="row content">
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <form x-on:submit.prevent="this.nameUser=nameUser, selectedLanguage=languages.value">
+                        <label>Please enter your name</label>
+                        <br>
+                        <input type="text" x-model="nameUser">
+                        <br>
+                        <label for="languages">Choose a Language:</label>
+                        <select name="languages" id="languages">
+                            <option value="Hello">English</option>
+                            <option value="Habari">Swahili</option>
+                            <option value="Kunjani">Zulu</option>
+                            <option value="Olyotyo">Luganda</option>
+                        </select>
+                        <br>
+                        <button x-on:click="greet">Greet</button>
+                    </form>
+                    <div><span><label x-text="selectedLanguage"></label></span>
+                        <span x-text="greetPhrase"></span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <form x-on:submit.prevent="this.daytime = time.value">
+                        <label for="time">Choose a time of day:</label>
+                        <select x-model="daytime" name="time" id="time">
+                            <option value="">Select Time</option>
+                            <option value="morning">Morning</option>
+                            <option value="afternoon">Afternoon</option>
+                            <option value="other">Other Time</option>
+                        </select>
+                        <br>
+                        <button @click="fee">Submit</button>
+                        <br>
+                    </form>
+                    <div><span x-text="price"></span></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <form x-on:submit.prevent="this.atStr=atStr, this.AT=AT">
+                        <label>Enter airtime available</label>
+                        <br>
+                        <input type="number" x-model="AT">
+                        <br>
+                        <label>Enter string in format 'call,data,sms'</label>
+                        <br>
+                        <input type="text" x-model="atStr">
+                        <br>
+                        <button x-on:click="enoughAT">Submit</button>
+                    </form>
+                    <br>
+                    <label x-text="airStr"></label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row content">
+
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <form x-on:submit.prevent="this.strList=strList">
+                        <label>Enter string in format 'call,data,sms'</label>
+                        <br>
+                        <input type="text" x-model="strList">
+                        <br>
+                        <button x-on:click="bill">Submit</button>
+
+                    </form>
+                    <br>
+                    <label x-text="returnString"></label>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <form x-on:submit.prevent="this.str=str">
+                        <label>Enter a sentence</label>
+                        <br>
+                        <input type="text" x-model="str">
+                        <br>
+                        <button x-on:click="wordGame">Submit</button>
+                    </form>
+                    <div>
+                        <label>Shortest Word: </label>
+                        <span x-text="short"></span>
+                    </div>
+
+                    <div>
+                        <label>Longest Word: </label>
+                        <span x-text="long"></span>
+                    </div>
+
+                    <div>
+                        <label>Sentence Length:</label>
+                        <span x-text="sentenceLength"></span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <script src="alpineCode.js" async defer></script>
+</body>
+
+</html>
