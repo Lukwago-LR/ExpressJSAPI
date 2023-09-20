@@ -1,12 +1,6 @@
-POST http://localhost:3019/api/greet
-content-type: application/json
+GET http://localhost:3011/api/predict
 
-{
-    'language' : 'xhosa',
-    'greeting' : 'Molo'
-}
 
 ### 
-
-GET http://localhost:3019/api/greet?name=Andrey&language=Pedi
+GET http://localhost:3011/upload
 content-type: application/json
