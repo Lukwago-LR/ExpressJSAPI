@@ -1,5 +1,4 @@
 import os
-from flask import jsonify
 import numpy as np
 import tensorflow as tf
 import tensorflow_hub
