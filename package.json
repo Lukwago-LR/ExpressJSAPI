@@ -24,12 +24,24 @@
   },
   "contributors": [],
   "scripts": {
-    "dev": "",
-    "start":"node index.js",
+    "dev": "nodemon",
+    "start": "node index.js",
     "test": "mocha"
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "fs": "^0.0.1-security",
+    "hub": "^6.1.2",
+    "multer": "^1.4.5-lts.1",
+    "nodemon": "^3.0.1",
+    "numpy": "^0.0.1",
+    "path": "^0.12.7",
+    "python": "^0.0.4",
+    "python-shell": "^5.0.0",
+    "tensor-flow": "^0.0.1"
+  },
+  "devDependencies": {
+    "tensor-flow": "^0.0.1"
   }
 }

@@ -1,13 +1,9 @@
 import express from 'express';
+import multer from 'multer';
+import path from 'path'
 import cors from 'cors';
-
-import longestWord from './bootcamp/longestWord.js';
-import shortestWord from './bootcamp/shortestWord.js';
-import wordLengths from './bootcamp/wordLengths.js';
-import totalPhoneBill from './bootcamp/totalPhoneBill.js';
-import enoughairtime from './bootcamp/enoughAirtime.js';
-import transportFee from './bootcamp/transportFee.js';
-import greet from './bootcamp/greet.js'
+import fs from 'fs'
+import { PythonShell } from 'python-shell'
 
 
 const app = express()
@@ -24,84 +20,35 @@ app.use(express.json());
 app.use(cors());
 
 // route definitions below here
-app.get("/api/word_game", function (req, res) {
-    const sentence = req.query.sentence;
-
-    if (!sentence) {
-        res.json({
-            error: "sentence not found!"
-        })
-    }
-
-    res.json(
-        {
-            "longestWord": longestWord(sentence),
-            "shortestWord": shortestWord(sentence),
-            "length": wordLengths(sentence)
-        }
-    );
+app.get("/api/predict", function (req, res) {
+    // run python code
+    PythonShell.run('Python-Code/main.py', null).then(messages => {
+        console.log(messages[2])
+        res.json(
+            {
+                "predictions": messages[2]
+            }
+        );
+    });
 });
 
-app.get("/api/totalphonebill", function (req, res) {
-    const sentence = req.query.sentence
-    if (!sentence) {
-        res.json({
-            error: "sentence not found!"
-        })
-    }
-
-    res.json(
-        {
-            "totalphonebill": totalPhoneBill(sentence)
-        }
-    );
+const storage = multer.diskStorage({
+    destination: 'public/uploads/', // Specify the directory where uploaded files will be saved
+    filename: function (req, file, callback) {
+        // Rename the file to ensure it doesn't overwrite any existing files
+        callback(null, "image" + path.extname(file.originalname));
+    },
 });
 
-app.get("/api/enoughairtime", function (req, res) {
-    const sentence = req.query.sentence
-    const amount = req.query.amount
-    if (!sentence || !amount) {
-        res.json({
-            error: "sentence or amount not found!"
-        })
+const upload = multer({ storage });
+
+app.use(express.static('public')); // Serve static files like HTML
+
+app.post('/upload', upload.single('image'), (req, res) => {
+    if (!req.file) {
+        return res.status(400).write('<h1 style="color:red; text-align:center;">No file uploaded.</h1><div style="text-align:center;"><button onclick="history.back();">Back</button></div>');
     }
-
-    res.json(
-        {
-            "enoughairtime": enoughairtime(sentence, amount)
-        }
-    );
-});
-
-app.get("/api/transportFee", function (req, res) {
-    const day= req.query.day
-    if (!day) {
-        res.json({
-            error: "day not found!"
-        })
-    }
-
-    res.json(
-        {
-            "transport": transportFee(day)
-        }
-    );
-});
-
-app.get("/api/greet", function (req, res) {
-    const name = req.query.name
-
-    if (!name) {
-        res.json({
-            error: "name not found!"
-        })
-    }
-
-    res.json(
-        {
-            "greet": greet(name)
-        }
-    );
+    res.write('<h1 style="color:green; text-align:center;">File uploaded successfully.</h1><div style="text-align:center;"><button onclick="history.back();">Back</button></div>');
 });
 
 let PORT = process.env.PORT || 3011;

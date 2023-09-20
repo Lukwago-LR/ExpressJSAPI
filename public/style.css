@@ -1,30 +1,324 @@
-body{
-    margin:20px;
+/* Home page CSS */
+body {
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
 }
 
-.header{
-    text-align: center;
-    border: 5px solid rgb(93, 93, 224);
-    border-radius: 50px;
-    color: red;
-    font-size: 2em;
-    margin-bottom: 10px;
-}
-
-.content{
-    text-align: center;
-    border: 5px solid rgb(93, 93, 224);
-    border-radius: 50px;
-    padding: 15px;
-    margin: 10px;    
- }
-
- label{
-    color:red;
-}
-
-.card{
-    text-align: center;
+section {
+    border: solid rgb(0, 225, 255) 10px;
     border-radius: 20px;
-    border: 5px solid greenyellow;
+    overflow-y: hidden;
+
+    &:hover {
+        overflow-y: scroll;
+    }
+}
+
+header {
+    padding: 30px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+
+    .banner {
+        border-radius: 30px;
+    }
+
+    .toggle {
+        padding: 5px;
+        margin: 3px;
+    }
+
+    .logout {
+        float: right;
+    }
+}
+
+.menu {
+    display: block;
+    background-color: #F7F7F7;
+    padding-top: 1em;
+    padding-right: 1em;
+    padding: 0.5em;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: #f2f4f5 solid;
+    border-radius: 30px;
+}
+
+button {
+    border: solid 3px rgb(205, 228, 205);
+    border-radius: 50px;
+}
+
+button:hover {
+    background-color: lightblue;
+}
+
+main {
+    background: lightgray;
+    border-radius: 30px;
+    min-height: 100px;
+    margin: 20px;
+    text-align: center;
+
+
+    .button {
+        height: 110px;
+        width: 85px;
+        padding: 15px;
+        border-radius: 10px;
+        background-color: white;
+        margin: 10px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .col-xs-4 {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .hospitals {
+        padding: 15px;
+        align-items: center;
+        text-align: center;
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #3E3049;
+        }
+
+        .hospital {
+            border-radius: 10px;
+            padding: 15px;
+            background: white;
+            margin-bottom: 20px;
+        }
+    }
+
+    .title {
+        font-weight: bold;
+    }
+
+    .location {
+        color: #665E77;
+    }
+
+    .consult {
+        color: #7358D4;
+    }
+}
+
+/* Login CSS */
+
+.mainlogin {
+    font-family: 'Ubuntu', sans-serif;
+    background-color: #ffffff;
+    margin: 5px;
+    padding: 20px;
+    border-radius: 1.5em;
+    box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
+}
+
+.sign {
+    padding-top: 40px;
+    color: #8C55AA;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-size: 23px;
+    text-align: center;
+}
+
+.un {
+    width: 76%;
+    color: rgb(38, 50, 56);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    background: rgba(136, 126, 126, 0.04);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    box-sizing: border-box;
+    border: 2px solid rgba(0, 0, 0, 0.02);
+    margin-bottom: 50px;
+    margin-left: 46px;
+    text-align: center;
+    margin-bottom: 27px;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.form {
+    padding-top: 40px;
+    text-align: center;
+}
+
+.pass {
+    width: 76%;
+    color: rgb(38, 50, 56);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    background: rgba(136, 126, 126, 0.04);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    box-sizing: border-box;
+    border: 2px solid rgba(0, 0, 0, 0.02);
+    margin-bottom: 50px;
+    margin-left: 46px;
+    text-align: center;
+    margin-bottom: 27px;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+
+.un:focus,
+.pass:focus {
+    border: 2px solid rgba(0, 0, 0, 0.18) !important;
+
+}
+
+.submit {
+    cursor: pointer;
+    border-radius: 5em;
+    color: #fff;
+    background: linear-gradient(to right, #9C27B0, #E040FB);
+    border: 0;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 13px;
+    box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+    text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
+    color: #E1BEE7;
+    text-decoration: none
+}
+
+.forgot {
+    text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
+    background-color: #eee5f0;
+    margin: 10px;
+}
+
+.classifying,
+.imaging,
+.augmenting,
+.camering {
+    text-align: center;
+    margin-top: 20px;
+
+    .title {
+        color: rgb(170, 22, 22);
+    }
+
+}
+
+.home {
+    float: right;
+    margin-right: 50px;
+}
+
+#aSide {
+    border-radius: 20px;
+    height: 850px;
+    width: 100%;
+    text-align: center;
+}
+
+/* This styles the 3D object inserted in the aside container */
+#aSide model-viewer {
+    height: 850px;
+    width: 100%;
+}
+
+/* This styles the section for augmentation reality */
+.video {
+    position: relative;
+    text-align: center;
+    margin-left: 28em;
+    width: 25em;
+    height: 25em;
+    z-index: -10;
+}
+
+.smallVideo {
+    position: relative;
+    text-align: center;
+    border: 1px solid greenyellow;
+    border-radius: 10%;
+    margin-left: 8em;
+    width: 20em;
+    z-index: 10;
+    bottom: 400px;
+    height: 150px;
+    background-image: url(uploads/image001.png);
+    background-size: 280px 150px;
+}
+
+#myCanvas {
+    position: relative;
+    width: 75em;
+    height: 35em;
+}
+
+.augment {
+    height: 40px;
+    width: 20px;
+    text-align: center;
+}
+
+.loading {
+    display: flex;
+    justify-content:center ;
+}
+
+.loading::after {
+    content: "";
+    width: 50px;
+    height: 50px;
+    border: 10px solid #dddddd;
+    border-top-color: #009579;
+    border-radius: 50%;
+    animation: loading 1s linear infinite;
+}
+
+@keyframes loading {
+    to {
+        transform: rotate(1turn);
+    }
+}
+
+.augment model-viewer {
+    height: 10em;
+    width: 18em;
+}
+
+/* styling for the camera section */
+#title {
+    border-color: #b81019;
+    font-size: large;
+}
+
+#downloadLink {
+    color: #b81019;
+    padding-top: 8px;
+}
+
+.upload {
+    width: 58%;
+    float: right;
+}
+
+/* CSS for classification*/
+.classifying {
+    justify-content: center;
 }

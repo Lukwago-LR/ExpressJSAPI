@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>API Widgets</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+    <title>Ultrasound&AugmentedReality</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
         integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link href="style.css" rel="stylesheet">
-    <script src="//unpkg.com/alpinejs" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"
-        integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/alpinejs" defer></script>
 
     <style>
         [x-cloak] {
@@ -21,128 +20,205 @@
     </style>
 </head>
 
-<body x-cloak x-data="mainFunction">
-    <div class="header"> API WIDGETS</div>
+<body x-clock x-data="mainFunction">
 
-    <div class="row content">
-        <div class="col-sm-4">
-            <div class="card">
-                <div class="card-body">
-                    <form x-on:submit.prevent="this.nameUser=nameUser, selectedLanguage=languages.value">
-                        <label>Please enter your name</label>
-                        <br>
-                        <input type="text" x-model="nameUser">
-                        <br>
-                        <label for="languages">Choose a Language:</label>
-                        <select name="languages" id="languages">
-                            <option value="Hello">English</option>
-                            <option value="Habari">Swahili</option>
-                            <option value="Kunjani">Zulu</option>
-                            <option value="Olyotyo">Luganda</option>
-                        </select>
-                        <br>
-                        <button x-on:click="greet">Greet</button>
-                    </form>
-                    <div><span><label x-text="selectedLanguage"></label></span>
-                        <span x-text="greetPhrase"></span>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <div class="col-sm-4">
-            <div class="card">
-                <div class="card-body">
-                    <form x-on:submit.prevent="this.daytime = time.value">
-                        <label for="time">Choose a time of day:</label>
-                        <select x-model="daytime" name="time" id="time">
-                            <option value="">Select Time</option>
-                            <option value="morning">Morning</option>
-                            <option value="afternoon">Afternoon</option>
-                            <option value="other">Other Time</option>
-                        </select>
-                        <br>
-                        <button @click="fee">Submit</button>
-                        <br>
-                    </form>
-                    <div><span x-text="price"></span></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="card">
-                <div class="card-body">
-                    <form x-on:submit.prevent="this.atStr=atStr, this.AT=AT">
-                        <label>Enter airtime available</label>
-                        <br>
-                        <input type="number" x-model="AT">
-                        <br>
-                        <label>Enter string in format 'call,data,sms'</label>
-                        <br>
-                        <input type="text" x-model="atStr">
-                        <br>
-                        <button x-on:click="enoughAT">Submit</button>
-                    </form>
-                    <br>
-                    <label x-text="airStr"></label>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row content">
-
-        <div class="col-sm-6">
-            <div class="card">
-                <div class="card-body">
-                    <form x-on:submit.prevent="this.strList=strList">
-                        <label>Enter string in format 'call,data,sms'</label>
-                        <br>
-                        <input type="text" x-model="strList">
-                        <br>
-                        <button x-on:click="bill">Submit</button>
-
-                    </form>
-                    <br>
-                    <label x-text="returnString"></label>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-sm-6">
-            <div class="card">
-                <div class="card-body">
-                    <form x-on:submit.prevent="this.str=str">
-                        <label>Enter a sentence</label>
-                        <br>
-                        <input type="text" x-model="str">
-                        <br>
-                        <button x-on:click="wordGame">Submit</button>
-                    </form>
+    <!-- section for login -->
+    <section x-show="logout">
+        <div class="row mainlogin">
+            <div class="col-md-12">
+                <p class="sign">Sign in</p>
+                <form x-on:submit.prevent="this.username, this.password" class="form">
+                    <input class="un " type="text" text-align="center" x-model="username" placeholder="Username">
+                    <input class="pass" type="password" text-align="center" x-model="password" placeholder="Password">
                     <div>
-                        <label>Shortest Word: </label>
-                        <span x-text="short"></span>
+                        &nbsp;<button type="submit" @click="authentication" class="submit" text-align="center">Sign
+                            in</button>
+                        <br>
+                        <button type="submit" class="forgot" text-align="center">Forgot Password?</button>
                     </div>
+                </form>
+            </div>
 
-                    <div>
-                        <label>Longest Word: </label>
-                        <span x-text="long"></span>
+        </div>
+        </div>
+    </section>
+
+    <!-- section for home page -->
+    <section x-show="login&&homePage">
+        <header>
+            <div class="menu">
+                <button @click="toggle = !toggle"><img src="images/menu.png" alt="menu-icon" width="45px"></button>
+            </div>
+            <div x-show="toggle" class="toggle">
+
+                <button type="submit" @click="openAccount"><img src="images/account.jpg" alt="account" width="35px">
+                    <p>Account</p>
+                </button>
+
+                <button class="logout" @click="LoggingOut">
+                    <h3>logout</h3>
+                </button>
+            </div>
+            <img class="banner" src="images/header.png" alt="header" height="400px" width="100%">
+        </header>
+
+        <main>
+            <div class="row">
+                <div class="col-xs-6 col-md-3">
+                    <button id="cameraButton" type="submit" @click="openCamera">
+                        <img class="button" src="images/camera.jpg" alt="camera">
+                        <p>Camera</p>
+                    </button>
+
+                </div>
+                <div class="col-xs-6 col-md-3">
+                    <button type="submit" @click="openClassification">
+                        <img class="button" src="images/classification.jpeg" alt="classification">
+                        <p>Classification</p>
+                    </button>
+
+                </div>
+
+                <div class="col-xs-6 col-md-3">
+                    <button type="submit" @click="open3D">
+                        <img class="button" src="images/3D.png" alt="3D">
+                        <p>3D Imaging</p>
+                    </button>
+                </div>
+
+                <div class="col-xs-6 col-md-3">
+                    <button id="augButton" type="submit" @click="openAugmentation">
+                        <img class="button" src="images/augmented.jpg" alt="augmented">
+                        <p>Augmented Reality</p>
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="hospitals">
+                <h2>Specialist Availability</h2>
+                <div class="row hospital">
+                    <div class="col-md-6 logo">
+                        <img src="images/doctor.png" alt="logo" width="96px" height="96px">
                     </div>
+                    <div class="col-md-6 info">
+                        <div class="title">Dr Hassan Ssemambo</div>
 
-                    <div>
-                        <label>Sentence Length:</label>
-                        <span x-text="sentenceLength"></span>
+                        <div class="location">Soweto Municipal Hospital</div>
+
+                        <div class="consult">0500-2200 hours</div>
+
                     </div>
+                </div>
+                <div class="row hospital">
+                    <div class="col-md-6 logo">
+                        <img src="images/doctor.png" alt="logo" width="96px" height="96px">
+                    </div>
+                    <div class="col-md-6 info">
+                        <div class="title"> Dr Kabugo Timothy</div>
+                        <div class="location">Pretoria Referal Hospital</div>
+                        <div class="consult">0500-2300 hours</div>
+                    </div>
+                </div>
 
+                <div class="row hospital">
+                    <div class="col-md-6 logo">
+                        <img src="images/doctor.png" alt="logo" width="96px" height="96px">
+                    </div>
+                    <div class="col-md-6 info">
+                        <div class="title"> Dr Nantongo Josephine</div>
+                        <div class="location">Midrand Referal Hospital</div>
+                        <div class="consult">0500-2300 hours</div>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </main>
+
+    </section>
+
+    <!-- section for user account -->
+    <section class="text-center" x-show="login&&account">
+        <button class="home" type="submit" @click="openHome('account')">Home</button>
+        <br>
+        <h2 class="text-danger">PROFILE</h2>
+        <label x-text="response"></label>
+    </section>
+
+    <!-- section for image classification -->
+    <section x-show="login&&classification">
+        <div class="classifying">
+            <button class="home" type="submit" @click="openHome('classification')">Home</button>
+            <br>
+            <h2 class="title">CLASSIFICATION</h2>
+            <br>
+            <button @click="predict">Get Prediction</button>
+            <br>
+            <text class="text-success" x-text="prediction"></text>
+
+            <div x-show="load" class="loading">
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- section for 3D Imaging-->
+    <section class="imaging" x-show="login&&image3D">
+        <div>
+            <button class="home" type="submit" @click="openHome('image3D')">Home</button>
+            <br>
+            <h2 class="title">3D IMAGING</h2>
+        </div>
+        <div id="aSide">
+            <model-viewer src="model_3D/scene.gltf" alt="Lung Cancer model" auto-rotate camera-controls ar
+                ios-src="model_3D/scene.gltf">
+            </model-viewer>
+        </div>
+    </section>
+
+    <!-- section for Augmented Reality -->
+    <section class="augmenting" x-show="login&&augmentation">
+        <div>
+            <button id="augHome" class="home" type="submit" @click="openHome('augmentation')">Home</button>
+            <br>
+            <h2 class="title">CONCEPTUAL AUGMENTED REALITY</h2>
+        </div>
+        <div class="video">
+            <canvas id="myCanvas"></canvas>
+            <div class="smallVideo">
+                <div class="augment">
+                    <model-viewer src="model_Augment/scene.gltf" alt="left&right lungs" auto-rotate camera-controls ar
+                        ios-src="model_Augment/scene.gltf">
+                    </model-viewer>
                 </div>
             </div>
         </div>
+    </section>
 
+    <!-- section for Camera -->
+    <section class="camering" x-show="login&&camera">
+        <div>
+            <button class="home" type="submit" @click="openHome('camera')">Home</button>
+            <br>
+            <h2 class="title">CAMERA</h2>
+        </div>
 
-    </div>
+        <div class="row">
+            <div class="col-sm-12 upload text-justify">
+                <h4 class="text-danger">Upload An Ultrasound Image</h4>
+                <form action="/upload" method="POST" enctype="multipart/form-data">
+                    <input type="file" name="image" accept="image/*">
+                    <input type="submit" value="Upload">
+                </form>
+            </div>
+        </div>
+    </section>
 
-
-    <script src="alpineCode.js" async defer></script>
 </body>
+<script src="code.js"></script>
+<script src="videoCode.js"></script>
 
 </html>
