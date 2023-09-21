@@ -1,4 +1,7 @@
-GET http://localhost:3011/api/predict
+GET http://127.0.0.1:5000/predict
+
+###
+GET http://127.0.0.1:5000/
 
 
 ### 
