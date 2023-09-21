@@ -1,4 +1,6 @@
 numpy>1.21
-python>0.0.0,
-python-shell>=5.0.0,
-tensor-flow>=0.0.1
+numpy>1.21
+opencv-python==4.8.0.74
+pip==23.0.1
+tensorflow-hub==0.14.0
+tensorflow>2.10
