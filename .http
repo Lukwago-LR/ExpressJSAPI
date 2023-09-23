@@ -1,9 +1,9 @@
-GET http://127.0.0.1:5000/predict
+GET http://localhost:3011/api/javaWay
 
 ###
 GET http://127.0.0.1:5000/
 
 
 ### 
-GET http://localhost:3011/upload
+GET http://localhost:3011/api/upload
 content-type: application/json
