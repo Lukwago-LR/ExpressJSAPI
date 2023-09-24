@@ -2,8 +2,7 @@ import express from 'express';
 import multer from 'multer';
 import path from 'path'
 import cors from 'cors';
-import { PythonShell } from 'python-shell'
-// import { loadLayersModel, browser, scalar } from '@tensorflow/tfjs-node'; // For Node.js environment
+import { exec } from 'child_process'
 
 const app = express()
 
@@ -18,70 +17,40 @@ app.use(express.json());
 //referencing cors
 app.use(cors());
 
-// route definitions below here
 app.get("/api/predict", function (req, res) {
-    // run python code
-    PythonShell.run('Python-Code/main.py', null).then(messages => {
-        console.log(messages[2])
-        res.json(
-            {
-                "predictions": messages[2]
-            }
-        );
+    // Replace 'pythonScript.py' with the path to your Python script
+    const pythonScriptPath = 'Python-Code/main.py';
+
+    const pythonProcess = exec(`python ${pythonScriptPath}`);
+
+    // Handle the output (stdout) of the Python script
+    pythonProcess.stdout.on('data', (data) => {
+        // console.log('Python Script Output:', data);
+
+        if(data.startsWith("[")){
+            console.log('Python Script Output:', data);
+            res.json(
+                {
+                    "predictions": data.trim()
+                }
+            );
+        }
     });
+
+    // Handle any errors or exit events
+    pythonProcess.on('error', (error) => {
+        console.error('Error executing Python script:', error);
+    });
+
+    pythonProcess.on('exit', (code) => {
+        if (code === 0) {
+            console.log('Python script exited successfully.');
+        } else {
+            console.error('Python script exited with code:', code);
+        }
+    });
+
 });
-
-// route definitions below here
-// app.get("/api/javaWay", function (req, res) {
-//     // const tf = require('@tensorflow/tfjs-node'); // For Node.js environment
-
-//     // Define a function to load the model
-//     async function loadModel() {
-//         const model = await loadLayersModel('trainedModel/20230130-17341675100040-full-image-set-mobienetv2-Adam.h5');
-
-//         // Define a function to classify an image
-//         async function classifyImage(imageElement) {
-//             // Preprocess the image
-//             const tensor = browser.fromPixels(imageElement)
-//                 .resizeNearestNeighbor([224, 224]) // Resize to the model's input size
-//                 .toFloat()
-//                 .div(scalar(255))
-//                 .expandDims();
-
-//             // Make a prediction
-//             const prediction = await model.predict(tensor);
-
-//             // Get the class with the highest probability
-//             const predictedClass = prediction.argMax(1).dataSync()[0];
-
-//             return predictedClass;
-//         }
-
-//         return classifyImage;
-//     }
-
-//     // Load the model and use it for classification
-//     loadModel()
-//         .then(classifyImage => {
-
-//             const img = new Image();
-
-//             // Set the source of the image
-//             img.src = 'uploads\image001.png';
-//             const imageElement = img.src;
-//             const predictedClass = classifyImage(imageElement);
-//             console.log('Predicted class:', predictedClass);
-//             res.json(
-//                 {
-//                     "predictions": predictedClass
-//                 }
-//             );
-//         })
-//         .catch(error => {
-//             console.error('Error loading model:', error);
-//         });
-
-// });
 
 const storage = multer.diskStorage({
     destination: 'public/uploads/', // Specify the directory where uploaded files will be saved
