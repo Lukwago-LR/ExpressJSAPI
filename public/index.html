@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/alpinejs" defer></script>
+    <!-- AR.js by @jerome_etienne - github: https://github.com/jeromeetienne/ar.js - info: https://medium.com/arjs/augmented-reality-in-10-lines-of-html-4e193ea9fdbf -->
+    <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.0/aframe/build/aframe-ar.js"></script>
 
     <style>
         [x-cloak] {
@@ -24,6 +27,7 @@
 
     <!-- section for login -->
     <section x-show="logout">
+        <br><br><br><br><br><br>
         <div class="row mainlogin">
             <div class="col-md-12">
                 <p class="sign">Sign in</p>
@@ -38,8 +42,8 @@
                     </div>
                 </form>
             </div>
-
         </div>
+        <br><br><br><br><br>
         </div>
     </section>
 
@@ -161,7 +165,6 @@
             <div x-show="load" class="loading">
 
             </div>
-
         </div>
     </section>
 
@@ -182,20 +185,13 @@
     <!-- section for Augmented Reality -->
     <section class="augmenting" x-show="login&&augmentation">
         <div>
+            <span class="title">Augmented Reality Concepts</span>
             <button id="augHome" class="home" type="submit" @click="openHome('augmentation')">Home</button>
-            <br>
-            <h2 class="title">CONCEPTUAL AUGMENTED REALITY</h2>
         </div>
-        <div class="video">
-            <canvas id="myCanvas"></canvas>
-            <div class="smallVideo">
-                <div class="augment">
-                    <model-viewer src="model_Augment/scene.gltf" alt="left&right lungs" auto-rotate camera-controls ar
-                        ios-src="model_Augment/scene.gltf">
-                    </model-viewer>
-                </div>
-            </div>
-        </div>
+
+        <br>
+        <button id="augHome" type="submit" @click="navigateToNewPage()">Aug</button>
+
     </section>
 
     <!-- section for Camera -->

@@ -79,7 +79,7 @@ class Classifying:
         custom_data = self.create_data_batches(image_path_list, test_data=True)
 
         # Loading the full model
-        loaded_full_model = self.load_model("public/trainedModel/Adam.h5")
+        loaded_full_model = self.load_model("public/trainedModel/20231006-17521696614772-New.hdf5")
 
         # Make predictions on the custom data
         custom_predictions = loaded_full_model.predict(custom_data)

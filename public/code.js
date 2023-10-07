@@ -16,6 +16,10 @@ function AlpineMainFunction() {
         prediction: "",
         load: false,
 
+        navigateToNewPage(){
+            window.location.href='https://lukwago-lr.github.io/Augmented-Reality-FYP/'
+        },
+
         predict() {
             this.load=true;
             axios.get('/api/predict')
