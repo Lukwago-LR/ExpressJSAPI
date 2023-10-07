@@ -27,7 +27,7 @@ app.get("/api/predict", function (req, res) {
     pythonProcess.stdout.on('data', (data) => {
         // console.log('Python Script Output:', data);
 
-        if(data.startsWith("[")){
+        if (data.startsWith("[")) {
             console.log('Python Script Output:', data);
             res.json(
                 {
@@ -49,21 +49,21 @@ app.get("/api/predict", function (req, res) {
             console.error('Python script exited with code:', code);
         }
     });
-
 });
 
 const storage = multer.diskStorage({
-    destination: 'public/uploads/', // Specify the directory where uploaded files will be saved
-    filename: function (req, file, callback) {
-        // Rename the file to ensure it doesn't overwrite any existing files
-        callback(null, "image" + path.extname(file.originalname));
+    destination: function (req, file, cb) {
+        cb(null, 'public/uploads/'); // Set the destination folder for uploaded files
     },
+    filename: function (req, file, cb) {
+        const fileName = file.fieldname + '-' + Date.now() + path.extname(file.originalname);
+        cb(null, fileName); // Set the file name
+    }
 });
 
-const upload = multer({ storage });
+const upload = multer({ storage: storage });
 
-app.use(express.static('public')); // Serve static files like HTML
-
+// Handle image upload
 app.post('/upload', upload.single('image'), (req, res) => {
     if (!req.file) {
         return res.status(400).write('<h1 style="color:red; text-align:center;">No file uploaded.</h1><div style="text-align:center;"><button onclick="history.back();">Back</button></div>');

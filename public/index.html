@@ -32,7 +32,7 @@
             <div class="col-md-12">
                 <p class="sign">Sign in</p>
                 <form x-on:submit.prevent="this.username, this.password" class="form">
-                    <input class="un " type="text" text-align="center" x-model="username" placeholder="Username">
+                    <input class="un" type="text" text-align="center" x-model="username" placeholder="Username">
                     <input class="pass" type="password" text-align="center" x-model="password" placeholder="Password">
                     <div>
                         &nbsp;<button type="submit" @click="authentication" class="submit" text-align="center">Sign
@@ -40,10 +40,11 @@
                         <br>
                         <button type="submit" class="forgot" text-align="center">Forgot Password?</button>
                     </div>
+                    <text class="text-danger" text-align="center" x-text="feed"></text>
                 </form>
             </div>
         </div>
-        <br><br><br><br><br>
+        <br><br><br><br>
         </div>
     </section>
 
@@ -71,7 +72,7 @@
                 <div class="col-xs-6 col-md-3">
                     <button id="cameraButton" type="submit" @click="openCamera">
                         <img class="button" src="images/camera.jpg" alt="camera">
-                        <p>Camera</p>
+                        <p>Image Upload</p>
                     </button>
 
                 </div>
@@ -199,15 +200,14 @@
         <div>
             <button class="home" type="submit" @click="openHome('camera')">Home</button>
             <br>
-            <h2 class="title">CAMERA</h2>
+            <h2 class="title">IMAGE UPLOAD</h2>
         </div>
-
         <div class="row">
             <div class="col-sm-12 upload text-justify">
                 <h4 class="text-danger">Upload An Ultrasound Image</h4>
-                <form action="https://myfirstrender-7375.onrender.com/upload" method="POST" enctype="multipart/form-data">
-                    <input type="file" name="file">
-                    <input type="submit" value="Upload">
+                <form action="/upload" method="post" enctype="multipart/form-data">
+                    <input type="file" name="image" />
+                    <button type="submit">Upload</button>
                 </form>
             </div>
         </div>

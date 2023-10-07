@@ -15,17 +15,18 @@ function AlpineMainFunction() {
         srcData: "",
         prediction: "",
         load: false,
+        feed: "",
 
-        navigateToNewPage(){
-            window.location.href='https://lukwago-lr.github.io/Augmented-Reality-FYP/'
+        navigateToNewPage() {
+            window.location.href = 'https://lukwago-lr.github.io/Augmented-Reality-FYP/'
         },
 
         predict() {
-            this.load=true;
+            this.load = true;
             axios.get('/api/predict')
                 .then(response => {
                     this.prediction = response.data.predictions
-                    this.load=false;
+                    this.load = false;
                 })
                 .catch(function (error) {
                     // Handle any errors
@@ -36,14 +37,38 @@ function AlpineMainFunction() {
         LoggingOut() {
             this.logout = true;
             this.login = false;
+
+            localStorage['login'] = this.login;
+            localStorage['logout'] = this.logout;
+        },
+
+        init() {
+            let name = localStorage.getItem['username'];
+            let pass = localStorage.getItem['password'];
+            let inside = localStorage.getItem['login'];
+
+            if ((name != "" || pass !="" ) && inside == true) {
+                this.login = true;
+                this.logout = false;
+            }
         },
 
         authentication() {
-            this.login = true;
-            this.logout = false;
+            if (this.username != "" || this.password != "") {
+                this.login = true;
+                this.logout = false;
 
-            localStorage['username'] = this.username;
-            localStorage['password'] = this.password;
+                localStorage.setItem['login', this.login];
+                localStorage.setItem['logout', this.logout];
+
+                localStorage.setItem['username', this.username];
+                localStorage.setItem['password', this.password];
+
+            } else {
+
+                this.feed = "Invalid username or password"
+            }
+
         },
 
         openAccount() {
