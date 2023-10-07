@@ -278,7 +278,7 @@ main {
 
 .loading {
     display: flex;
-    justify-content:center ;
+    justify-content: center;
 }
 
 .loading::after {
@@ -321,4 +321,15 @@ main {
 /* CSS for classification*/
 .classifying {
     justify-content: center;
+}
+
+/* Tables */
+
+table,
+th,
+td {
+    border: 1px solid black;
+    padding: 15px;
+    border-spacing: 30px;
+    margin-left: 20rem;
 }

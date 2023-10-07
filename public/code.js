@@ -16,6 +16,9 @@ function AlpineMainFunction() {
         prediction: "",
         load: false,
         feed: "",
+        Norm: false,
+        Malig: false,
+        Beg: false,
 
         navigateToNewPage() {
             window.location.href = 'https://lukwago-lr.github.io/Augmented-Reality-FYP/'
@@ -27,6 +30,29 @@ function AlpineMainFunction() {
                 .then(response => {
                     this.prediction = response.data.predictions
                     this.load = false;
+                    
+                    if(this.prediction.includes('Norm') && this.prediction.includes('Beng') && this.prediction.includes('Malig')){
+                        this.Malig = true;
+                        this.Beg = true;
+                        this.Norm = true;
+                    }
+                    else if(this.prediction.includes('Norm') && this.prediction.includes('Malig')){
+                        this.Norm = true;
+                        this.Malig = true;
+                    }else if(this.prediction.includes('Norm') && this.prediction.includes('Beng')){
+                        this.Norm = true;
+                        this.Beg = true
+                    }else if(this.prediction.includes('Malig') && this.prediction.includes('Beng')){
+                        this.Malig = true;
+                        this.Beg = true
+                    }else if(this.prediction.includes('Norm')){
+                        this.Norm = true;
+                    }else if(this.prediction.includes('Malig')){
+                        this.Malig = true;
+                    }else if(this.prediction.includes('Beng')){
+                        this.Beg = true;
+                    }
+
                 })
                 .catch(function (error) {
                     // Handle any errors
@@ -47,7 +73,7 @@ function AlpineMainFunction() {
             let pass = localStorage.getItem['password'];
             let inside = localStorage.getItem['login'];
 
-            if ((name != "" || pass !="" ) && inside == true) {
+            if ((name != "" || pass != "") && inside == true) {
                 this.login = true;
                 this.logout = false;
             }
