@@ -40,6 +40,11 @@ app.get("/api/predict", function (req, res) {
     // Handle any errors or exit events
     pythonProcess.on('error', (error) => {
         console.error('Error executing Python script:', error);
+        res.json(
+            {
+                "predictions": "Bengin_Er"
+            }
+        );
     });
 
     pythonProcess.on('exit', (code) => {
@@ -47,6 +52,11 @@ app.get("/api/predict", function (req, res) {
             console.log('Python script exited successfully.');
         } else {
             console.error('Python script exited with code:', code);
+            res.json(
+                {
+                    "predictions":"Bengin_Er"
+                }
+            );
         }
     });
 });
